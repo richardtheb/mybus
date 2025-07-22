@@ -7,19 +7,19 @@ myBus is a very simple Python app to grab predictions for a bus stop and then di
 To install, follow these simple instructions:
 
 1. Grab this repository:\
-'git clone https://gitlab.com/richardtheb/mybus'
+``git clone https://gitlab.com/richardtheb/mybus``
 
 2. Move into the directory:\
-'cd mybus'
+``cd mybus``
 
 3. Set up the python requirements:\
-'pip3 install pavckage_requirements.txt'
+``pip3 install pavckage_requirements.txt``
 
 4. edit the config file, adding the provider API key:\
-'nano provider-config.yaml'
+``nano provider-config.yaml``
 
 5. run the app!\
-'python3 mybus.py'
+``python3 mybus.py``
 
 
 #Usage
