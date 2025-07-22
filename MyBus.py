@@ -319,6 +319,7 @@ def display_arrivals(arrivals, update_count):
                                                                           "Heavy Rail"] else "🚂" if route_type == "Commuter Rail" else "⛴️" if route_type == "Ferry" else "🚌"
 
             print(f"{emoji} Route {route_name} : {formatted_time} ({time_display})")
+            print()
     else:
         print(f"📭 No arrival information available")
         print(f"📅 Last Updated: {current_time} (Update #{update_count})")
