@@ -23,17 +23,23 @@ A cross-platform Python application that provides real-time transit arrival info
 
 **Important**: This application must be run in a virtual environment to avoid conflicts with system packages and ensure proper dependency management.
 
-### 1. Create and Activate Virtual Environment
+### 1. Clone this Git
+
+'''Git pull https://github.com/richardtheb/mybus
+   cd mybus
+'''
+
+### 2. Create and Activate Virtual Environment
 ```
 python3 -m venv mybus source mybus-env/bin/activate
 ```
-### 2. Install Dependencies
+### 3. Install Dependencies
 ```
 pip install -r package_requirements.txt
 ```
 
 
-### 3. Verify Installation
+### 4. Verify Installation
 
 Ensure your virtual environment is active (you should see `(mybus-env)` in your terminal prompt) before running the application.
 
