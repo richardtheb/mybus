@@ -25,12 +25,12 @@ A cross-platform Python application that provides real-time transit arrival info
 
 ### 1. Clone this Git
 
-'''
+```
 Git pull https://github.com/richardtheb/mybus
 cd mybus
-'''
+```
 
-### 2. Create and Activate Virtual Environment
+### 2. Create and Activate The Virtual Environment
 ```
 python3 -m venv mybus source mybus-env/bin/activate
 ```
