@@ -1,9 +1,8 @@
-#Description
+# Description
 myBus is a very simple Python app to grab predictions for a bus stop and then display them on the screen of a Raspberry Pi.
 
 
-
-#Installation
+# Installation
 To install, follow these simple instructions:
 
 1. Grab this repository:\
@@ -22,11 +21,11 @@ To install, follow these simple instructions:
 ``python3 mybus.py``
 
 
-#Usage
+# Usage
 The app runs continuously, but can be stopped by pressing any key.
 
-Support
+# Support
 None, really! Enjoy!
 
-Authors and acknowledgment
+# Authors and acknowledgment
 Richard Baguley for Microcenter
