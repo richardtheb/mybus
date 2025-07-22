@@ -1,0 +1,18 @@
+{
+  "transport_provider": {
+    "name": "MBTA",
+    "base_url": "https://api-v3.mbta.com",
+    "endpoints": {
+      "arrivals": "/predictions?filter[stop]={stop_id}&sort=arrival_time"
+    },
+    "api_key": "YOURS",
+    "headers": {
+      "Content-Type": "application/json",
+      "Accept": "application/vnd.api+json"
+    }
+  },
+  "bus_stop": {
+    "id": "101",
+    "name": "Massachusetts Ave @ Sidney St"
+  }
+}
