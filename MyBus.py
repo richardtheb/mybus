@@ -4,80 +4,14 @@ import logging
 from datetime import datetime, timezone
 import pytz
 import time
-import threading
 import sys
 import os
+import  keyboard
+from multiprocessing import Queue
 
-# Platform-specific imports for keyboard detection
-if os.name == 'nt':  # Windows
-    import msvcrt
-else:  # Unix/Linux/Mac
-    import select
-    import tty
-    import termios
-
-
-class KeyboardMonitor:
-    """Monitor keyboard input in a cross-platform way"""
-
-    def __init__(self):
-        self.stop_requested = False
-        self.original_settings = None
-
-    def setup_keyboard_monitoring(self):
-        """Setup keyboard monitoring based on platform"""
-        if os.name != 'nt':  # Unix/Linux/Mac
-            try:
-                self.original_settings = termios.tcgetattr(sys.stdin)
-                tty.setraw(sys.stdin.fileno())
-            except:
-                pass
-
-    def cleanup_keyboard_monitoring(self):
-        """Cleanup keyboard monitoring"""
-        if os.name != 'nt' and self.original_settings:  # Unix/Linux/Mac
-            try:
-                termios.tcsetattr(sys.stdin, termios.TCSADRAIN, self.original_settings)
-            except:
-                pass
-
-    def check_for_keypress(self):
-        """Check if any key has been pressed"""
-        if os.name == 'nt':  # Windows
-            return msvcrt.kbhit()
-        else:  # Unix/Linux/Mac
-            try:
-                return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
-            except:
-                return False
-
-    def monitor_keyboard(self):
-        """Monitor keyboard input in a separate thread"""
-        self.setup_keyboard_monitoring()
-
-        while not self.stop_requested:
-            try:
-                if self.check_for_keypress():
-                    # Clear the input buffer
-                    if os.name == 'nt':
-                        while msvcrt.kbhit():
-                            msvcrt.getch()
-                    else:
-                        sys.stdin.read(1)
-
-                    self.stop_requested = True
-                    break
-
-                time.sleep(0.1)  # Small delay to prevent high CPU usage
-            except KeyboardInterrupt:
-                self.stop_requested = True
-                break
-            except:
-                # Handle any other exceptions gracefully
-                time.sleep(0.1)
-
-        self.cleanup_keyboard_monitoring()
-
+def input_thread(a_list):
+    raw_input()             # use input() in Python3
+    a_list.append(True)
 
 def safe_get_nested_value(data, *keys, default=None):
     """Safely get nested dictionary values"""
@@ -275,7 +209,7 @@ def get_bus_arrivals():
     return arrivals
 
 
-def display_arrivals(arrivals, update_count):
+def display_arrivals(arrivals):
     """Display arrival information"""
     # Clear screen for clean updates
     clear_screen()
@@ -286,7 +220,7 @@ def display_arrivals(arrivals, update_count):
     if arrivals:
         # Print header with stop information
         stop_name = arrivals[0]['stop_name']
-        print(f"🚌 Live Arrivals for {stop_name}")
+        print(f"ðŸšŒ Live Arrivals for {stop_name}")
         print(f"Updated: {current_time}")
         print()
 
@@ -301,11 +235,11 @@ def display_arrivals(arrivals, update_count):
             # Format time to arrival
             if minutes_to_arrival is not None:
                 if minutes_to_arrival == 0:
-                    time_display = "🚨 Arriving now"
+                    time_display = "ðŸš¨ Arriving now"
                 elif minutes_to_arrival == 1:
                     time_display = "1 minute"
                 elif minutes_to_arrival <= 5:
-                    time_display = f"⚡ {minutes_to_arrival} minutes"
+                    time_display = f"âš¡ {minutes_to_arrival} minutes"
                 else:
                     time_display = f"{minutes_to_arrival} minutes"
             else:
@@ -315,63 +249,41 @@ def display_arrivals(arrivals, update_count):
             direction_text = f" (Direction {direction_id})" if direction_id != '' else ""
 
             # Choose appropriate emoji based on route type
-            emoji = "🚌" if route_type == "Bus" else "🚇" if route_type in ["Light Rail",
-                                                                          "Heavy Rail"] else "🚂" if route_type == "Commuter Rail" else "⛴️" if route_type == "Ferry" else "🚌"
+            emoji = "ðŸšŒ" if route_type == "Bus" else "ðŸš‡" if route_type in ["Light Rail",
+                                                                          "Heavy Rail"] else "ðŸš‚" if route_type == "Commuter Rail" else "â›´ï¸" if route_type == "Ferry" else "ðŸšŒ"
 
             print(f"{emoji} Route {route_name} : {formatted_time} ({time_display})")
-            print()
+            print(f"")
     else:
-        print(f"📭 No arrival information available")
-        print(f"📅 Last Updated: {current_time} (Update #{update_count})")
-        print(f"⏸️  Press any key to stop monitoring")
+        print(f"ðŸ“­ No arrival information available")
+        print(f"ðŸ“… Last Updated: {current_time}")
         print()
 
 
-def run_continuous_monitoring():
-    """Run the monitoring loop with keyboard interrupt detection"""
-    keyboard_monitor = KeyboardMonitor()
-
-    # Start keyboard monitoring thread
-    keyboard_thread = threading.Thread(target=keyboard_monitor.monitor_keyboard, daemon=True)
-    keyboard_thread.start()
-
-    print("🚀 Starting transit arrival monitoring...")
-    print("⏸️  Press any key to stop")
+def run_monitoring():
+    q = Queue()
+    print("ðŸš€ Starting transit arrival monitoring...")
+    print("â¸ï¸  Press any key to stop")
     print()
-
-    update_count = 0
-
-    try:
-        while not keyboard_monitor.stop_requested:
-            update_count += 1
-
-            # Fetch and display arrivals
-            arrivals = get_bus_arrivals()
-            display_arrivals(arrivals, update_count)
-
-            # Wait for 60 seconds or until key press
-            for _ in range(60):  # 60 seconds = 60 * 1 second intervals
-                if keyboard_monitor.stop_requested:
-                    break
-                time.sleep(1)
-
-    except KeyboardInterrupt:
-        keyboard_monitor.stop_requested = True
-
-    finally:
-        keyboard_monitor.stop_requested = True
-        keyboard_monitor.cleanup_keyboard_monitoring()
+    keyboard.add_hotkey("ctrl+alt+q", lambda: q.put("q"))
+    while q.empty():
+        # Fetch and display arrivals
+        arrivals = get_bus_arrivals()
+        display_arrivals(arrivals)
+        # Wait for 60 seconds or until key press
+        time.sleep(60)
         clear_screen()
-        print("🛑 Monitoring stopped. Thank you for using the transit arrival system!")
-
+    else:
+        print("stopped!")
+        exit
 
 def main():
     """Main function with error handling"""
     try:
-        run_continuous_monitoring()
+        run_monitoring()
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
-        print("❌ An error occurred while running the monitoring system")
+        print("âŒ An error occurred while running the monitoring system")
 
 
 if __name__ == "__main__":
