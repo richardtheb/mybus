@@ -1,4 +1,3 @@
-```markdown
 # Transit Arrival Monitor
 
 A cross-platform Python application that provides real-time transit arrival information for bus stops, trains, and other public transportation. The application continuously monitors and displays live arrival times with an intuitive console interface.
@@ -30,7 +29,6 @@ python3 -m venv mybus source mybus-env/bin/activate
 ```
 ### 2. Install Dependencies
 ```
-bash
 pip install -r package_requirements.txt
 ```
 
@@ -114,14 +112,7 @@ deactivate
 ### Reactivating for Future Use
 To run the application again later:
 
-**Windows:**
-```shell script
-transit-monitor-env\Scripts\activate
-python transit_monitor.py
-```
 
-
-**macOS/Linux:**
 ```shell script
 source transit-monitor-env/bin/activate
 python transit_monitor.py
