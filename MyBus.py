@@ -3,7 +3,7 @@ import requests
 import logging
 from datetime import datetime, timezone
 import pytz
-import  keyboard
+import keyboard
 from multiprocessing import Queue
 
 def input_thread(a_list):
