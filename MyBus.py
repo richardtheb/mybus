@@ -4,7 +4,6 @@ import logging
 from datetime import datetime, timezone
 import pytz
 import time
-import sys
 import os
 import  keyboard
 from multiprocessing import Queue
