@@ -222,7 +222,7 @@ def display_arrivals(arrivals):
             direction_text = f" (Direction {direction_id})" if direction_id != '' else ""
 
             
-            print(f"{route_type} Route {route_name} : {formatted_time} ({time_display})")
+            print(f" Route {route_name} : {formatted_time} ({time_display})")
             print(f"")
     else:
         print(f"No arrival information available")
