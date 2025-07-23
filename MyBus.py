@@ -5,7 +5,6 @@ import logging
 from datetime import datetime, timezone
 import time
 import os
-import emojis
 
 def safe_get_nested_value(data, *keys, default=None):
     """Safely get nested dictionary values"""
@@ -97,11 +96,11 @@ def extract_route_info(included_data, route_id):
 def get_route_type(route_type):
     """Convert route type number to emoji"""
     route_types = {
-        0: ":light-rail:",
-        1: ":railway-car:",
-        2: ":train:",
-        3: ":bus:",
-        4: ":ferry:"
+        0: "🚈",
+        1: "🚋",
+        2: "🚄",
+        3: "🚌",
+        4: "⛴️"
     }
     return route_types.get(route_type, "Transit")
 
@@ -224,9 +223,9 @@ def display_arrivals(arrivals):
             # Format time to arrival
             if minutes_to_arrival is not None:
                 if minutes_to_arrival == 0:
-                    time_display = ":light_bulb:Arriving now!"
+                    time_display = " Arriving now!"
                 elif minutes_to_arrival == 1:
-                    time_display = ":stopwatch: 1 minute"
+                    time_display = " 1 minute"
                 elif minutes_to_arrival <= 5:
                     time_display = f"{minutes_to_arrival} minutes"
                 else:
