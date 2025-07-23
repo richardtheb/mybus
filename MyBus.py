@@ -97,11 +97,11 @@ def extract_route_info(included_data, route_id):
 def get_route_type(route_type):
     """Convert route type number to emoji"""
     route_types = {
-        0: "🚈",
-        1: "🚃",
-        2: "🚋",
-        3: "🚌",
-        4: "⛴️"
+        0: ":light-rail:",
+        1: ":railway-car:",
+        2: ":train:",
+        3: ":bus:",
+        4: ":ferry:"
     }
     return route_types.get(route_type, "Transit")
 
@@ -224,9 +224,9 @@ def display_arrivals(arrivals):
             # Format time to arrival
             if minutes_to_arrival is not None:
                 if minutes_to_arrival == 0:
-                    time_display = "⚡Arriving now!"
+                    time_display = ":light_bulb:Arriving now!"
                 elif minutes_to_arrival == 1:
-                    time_display = "⏱️ 1 minute"
+                    time_display = ":stopwatch: 1 minute"
                 elif minutes_to_arrival <= 5:
                     time_display = f"{minutes_to_arrival} minutes"
                 else:
@@ -241,7 +241,7 @@ def display_arrivals(arrivals):
             print(f"{route_type} Route {route_name} : {formatted_time} ({time_display})")
             print(f"")
     else:
-        print(f“­⛔ No arrival information available")
+        print(f“­ No arrival information available")
         print(f"Last Updated: {current_time}")
         print()
 
@@ -267,7 +267,7 @@ def main():
         run_monitoring()
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
-        print("⛔ An error occurred while running the monitoring system")
+        print(":stop_sign: An error occurred while running the monitoring system")
 
 
 if __name__ == "__main__":
