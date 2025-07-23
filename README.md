@@ -81,7 +81,7 @@ Update the configuration with your specific details:
 **⚠️ Important**: Always ensure your virtual environment is activated before running the application.
 
 ```
-python mybus.py
+python MyBus.py
 ```
 
 
@@ -116,8 +116,8 @@ To run the application again later:
 
 
 ```shell script
-source transit-monitor-env/bin/activate
-python transit_monitor.py
+source myenv/bin/activate
+python MyBus.py
 ```
 
 
@@ -127,16 +127,16 @@ If you want to completely remove the virtual environment:
 # Make sure it's deactivated first
 deactivate
 # Then remove the directory
-rm -rf transit-monitor-env  # macOS/Linux
-rmdir /s transit-monitor-env  # Windows
-```
+rm -rf myenv  
 
+```
 
 ## Supported Transit Providers
 
 The application is designed to work with any transit API that follows RESTful patterns. It has been tested with:
 
 - **MBTA** (Massachusetts Bay Transportation Authority)
+- **MTA** (New York Transit Authority)
 - Other GTFS-RT compatible APIs
 
 To add support for other providers, update the `ProviderConfig.json` with the appropriate API endpoints and parameters.
@@ -186,11 +186,9 @@ Feel free to submit issues, feature requests, or pull requests. The code is stru
 When contributing, please ensure you're working within a virtual environment and include any new dependencies in `package_requirements.txt`.
 
 ## Author
-Richard Bagulery & PyCharm AI
+Richard Baguley & PyCharm AI
 
 ## License
 
 This project is open source. Please check with your transit provider regarding their API usage terms and conditions.
-```
-```
-```
+
