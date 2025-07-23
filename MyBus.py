@@ -241,7 +241,7 @@ def display_arrivals(arrivals):
             print(f"{route_type} Route {route_name} : {formatted_time} ({time_display})")
             print(f"")
     else:
-        print(f“­ No arrival information available")
+        print(f"No arrival information available")
         print(f"Last Updated: {current_time}")
         print()
 
