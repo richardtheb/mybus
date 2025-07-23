@@ -92,19 +92,6 @@ def extract_route_info(included_data, route_id):
 
     return {"short_name": "Unknown", "long_name": "Unknown Route", "route_type": 0}
 
-
-def get_route_type(route_type):
-    """Convert route type number to emoji"""
-    route_types = {
-        0: "🚈",
-        1: "🚋",
-        2: "🚄",
-        3: "🚌",
-        4: "⛴️"
-    }
-    return route_types.get(route_type, "Transit")
-
-
 def clear_screen():
     """Clear the console screen"""
     os.system('clear')
@@ -182,7 +169,7 @@ def get_bus_arrivals():
             arrivals.append({
                 'route_short_name': route_info['short_name'],
                 'route_long_name': route_info['long_name'],
-                'route_type': get_route_type(route_info.get('route_type', 3)),
+                'route_type': route_type,
                 'arrival_time': predicted_time,
                 'formatted_time': formatted_time,
                 'minutes_to_arrival': minutes_to_arrival,
