@@ -1,6 +1,6 @@
-# Transit Arrival Monitor
+# MyBus
 
-A cross-platform Python application that provides real-time transit arrival information for bus stops, trains, and other public transportation. The application continuously monitors and displays live arrival times with an intuitive console interface.
+A simple Python application for the Raspberry Pi that provides real-time transit arrival information for bus stops, trains, and other public transportation. The application continuously monitors and displays live arrival times with an intuitive console interface.
 
 ## Features
 
