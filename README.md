@@ -6,8 +6,6 @@ A cross-platform Python application that provides real-time transit arrival info
 
 🚌 **Real-time Arrivals**: Live arrival predictions for buses, trains, and other transit vehicles
 🔄 **Auto-refresh**: Automatically updates every 60 seconds
-⌨️ **Keyboard Control**: Press any key to stop monitoring
-🖥️ **Cross-platform**: Works on Windows, macOS, and Linux
 🕒 **Smart Time Display**: Shows both absolute arrival times and countdown minutes
 🚦 **Multiple Transit Types**: Supports buses, light rail, heavy rail, commuter rail, and ferries
 ⚡ **Visual Indicators**: Special highlighting for imminent arrivals (≤5 minutes)
@@ -36,7 +34,7 @@ python3 -m venv mybus source mybus-env/bin/activate
 ```
 ### 3. Install Dependencies
 ```
-pip install -r package_requirements.txt
+pip install -r requirements.txt
 ```
 
 
@@ -82,9 +80,7 @@ Update the configuration with your specific details:
 
 **⚠️ Important**: Always ensure your virtual environment is activated before running the application.
 
-```shell source transit-monitor-env/bin/activate
-
-# Then run the application
+```
 python mybus.py
 ```
 
@@ -93,7 +89,7 @@ The application will:
 1. Start monitoring and display "🚀 Starting transit arrival monitoring..."
 2. Show live arrivals with route numbers, arrival times, and countdown minutes
 3. Refresh automatically every 60 seconds
-4. Continue until you press any key
+4. Continue until you press Ctrl-C to stop
 
 ### Sample Output
 
@@ -107,11 +103,10 @@ Updated: 2:30:15 PM
 ```
 
 
-## Virtual Environment Management
 
 ### Deactivating the Environment
 When you're done using the application:
-```shell script
+```
 deactivate
 ```
 
