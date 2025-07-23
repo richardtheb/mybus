@@ -5,7 +5,7 @@ import logging
 from datetime import datetime, timezone
 import time
 import os
-import emoji
+import emojis
 
 def safe_get_nested_value(data, *keys, default=None):
     """Safely get nested dictionary values"""
