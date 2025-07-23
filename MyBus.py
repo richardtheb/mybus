@@ -2,13 +2,8 @@ import json
 import requests
 import logging
 from datetime import datetime, timezone
-import pytz
-import keyboard
-from multiprocessing import Queue
-
-def input_thread(a_list):
-    raw_input()             # use input() in Python3
-    a_list.append(True)
+import time
+import os
 
 def safe_get_nested_value(data, *keys, default=None):
     """Safely get nested dictionary values"""
@@ -75,12 +70,7 @@ def format_arrival_time(arrival_time_str):
     try:
         # Parse the arrival time and convert to local time
         arrival_time = datetime.fromisoformat(arrival_time_str.replace('Z', '+00:00'))
-
-        # Convert to Eastern Time (MBTA is in Boston)
-        eastern = pytz.timezone('US/Eastern')
-        local_time = arrival_time.astimezone(eastern)
-
-        return local_time.strftime('%I:%M %p')
+        return arrival_time.strftime('%I:%M %p')
     except (ValueError, TypeError):
         return arrival_time_str
 
@@ -116,7 +106,7 @@ def get_route_type_name(route_type):
 
 def clear_screen():
     """Clear the console screen"""
-    print ("\n" * 100)
+    os.system('clear')
 
 
 def get_bus_arrivals():
@@ -217,7 +207,7 @@ def display_arrivals(arrivals):
     if arrivals:
         # Print header with stop information
         stop_name = arrivals[0]['stop_name']
-        print(f"ðŸšŒ Live Arrivals for {stop_name}")
+        print(f"Live Arrivals for {stop_name}")
         print(f"Updated: {current_time}")
         print()
 
@@ -232,11 +222,11 @@ def display_arrivals(arrivals):
             # Format time to arrival
             if minutes_to_arrival is not None:
                 if minutes_to_arrival == 0:
-                    time_display = "ðŸš¨ Arriving now"
+                    time_display = "⚡Arriving now!"
                 elif minutes_to_arrival == 1:
-                    time_display = "1 minute"
+                    time_display = "⏱️ 1 minute"
                 elif minutes_to_arrival <= 5:
-                    time_display = f"âš¡ {minutes_to_arrival} minutes"
+                    time_display = f"{minutes_to_arrival} minutes"
                 else:
                     time_display = f"{minutes_to_arrival} minutes"
             else:
@@ -246,8 +236,8 @@ def display_arrivals(arrivals):
             direction_text = f" (Direction {direction_id})" if direction_id != '' else ""
 
             # Choose appropriate emoji based on route type
-            emoji = "ðŸšŒ" if route_type == "Bus" else "ðŸš‡" if route_type in ["Light Rail",
-                                                                          "Heavy Rail"] else "ðŸš‚" if route_type == "Commuter Rail" else "â›´ï¸" if route_type == "Ferry" else "ðŸšŒ"
+            emoji = "🚌" if route_type == "Bus" else "🚈" if route_type in ["Light Rail",
+                                                                          "Heavy Rail"] else "🚃" if route_type == "Commuter Rail" else "🚃" if route_type == "Ferry" else "⛴️"
 
             print(f"{emoji} Route {route_name} : {formatted_time} ({time_display})")
             print(f"")
@@ -258,21 +248,19 @@ def display_arrivals(arrivals):
 
 
 def run_monitoring():
-    q = Queue()
-    print("ðŸš€ Starting transit arrival monitoring...")
-    print("â¸ï¸  Press any key to stop")
+    print("Starting transit arrival monitoring...")
+    print("Press ctl-C to stop")
     print()
-    keyboard.add_hotkey("ctrl+alt+q", lambda: q.put("q"))
-    while q.empty():
+    outtahere =  False
+    while not outtahere:
         # Fetch and display arrivals
         arrivals = get_bus_arrivals()
         display_arrivals(arrivals)
-        # Wait for 60 seconds or until key press
+        # Wait for 60 seconds
         time.sleep(60)
         clear_screen()
     else:
-        print("stopped!")
-        exit
+        quit()
 
 def main():
     """Main function with error handling"""
