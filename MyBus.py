@@ -182,7 +182,7 @@ def get_bus_arrivals():
             arrivals.append({
                 'route_short_name': route_info['short_name'],
                 'route_long_name': route_info['long_name'],
-                'route_type': get_route_type_name(route_info.get('route_type', 3)),
+                'route_type': get_route_type(route_info.get('route_type', 3)),
                 'arrival_time': predicted_time,
                 'formatted_time': formatted_time,
                 'minutes_to_arrival': minutes_to_arrival,
