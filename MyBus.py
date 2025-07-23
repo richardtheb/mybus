@@ -169,7 +169,6 @@ def get_bus_arrivals():
             arrivals.append({
                 'route_short_name': route_info['short_name'],
                 'route_long_name': route_info['long_name'],
-                'route_type': route_type,
                 'arrival_time': predicted_time,
                 'formatted_time': formatted_time,
                 'minutes_to_arrival': minutes_to_arrival,
@@ -201,7 +200,6 @@ def display_arrivals(arrivals):
 
         for i, arrival in enumerate(arrivals, 1):
             route_name = arrival.get('route_short_name', 'Unknown')
-            route_type = arrival.get('route_type', 'Transit')
             formatted_time = arrival.get('formatted_time', 'Unknown')
             minutes_to_arrival = arrival.get('minutes_to_arrival')
             status = arrival.get('status', 'Scheduled')
