@@ -94,12 +94,12 @@ The application will:
 ### Sample Output
 
 ```
-🚌 Live Arrivals for Massachusetts Ave @ Sidney St
+Live Arrivals for Massachusetts Ave @ Sidney St
 Updated: 2:30:15 PM
 
-🚌 Route 1 : 2:35 PM (⚡ 5 minutes)
-🚇 Route Red : 2:38 PM (8 minutes)
-🚌 Route 47 : 2:42 PM (12 minutes)
+Route 1 : 2:35 PM ( 5 minutes)
+Route Red : 2:38 PM (8 minutes)
+Route 47 : 2:42 PM (12 minutes)
 ```
 
 
@@ -143,10 +143,9 @@ To add support for other providers, update the `ProviderConfig.json` with the ap
 
 ## Key Components
 
-- **KeyboardMonitor**: Cross-platform keyboard input detection
 - **API Integration**: Robust HTTP request handling with error recovery
 - **Time Calculations**: Accurate arrival time processing with timezone support
-- **Display Engine**: Clean, emoji-enhanced console output
+- **Display Engine**: Clean console output
 - **Configuration System**: Flexible JSON-based setup
 
 ## Error Handling
