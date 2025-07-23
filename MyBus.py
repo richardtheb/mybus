@@ -92,14 +92,14 @@ def extract_route_info(included_data, route_id):
     return {"short_name": "Unknown", "long_name": "Unknown Route", "route_type": 0}
 
 
-def get_route_type_name(route_type):
-    """Convert route type number to readable name"""
+def get_route_type(route_type):
+    """Convert route type number to emoji"""
     route_types = {
-        0: "Light Rail",
-        1: "Heavy Rail",
-        2: "Commuter Rail",
-        3: "Bus",
-        4: "Ferry"
+        0: "🚈",
+        1: "🚃",
+        2: "🚋",
+        3: "🚌",
+        4: "⛴️"
     }
     return route_types.get(route_type, "Transit")
 
@@ -235,15 +235,12 @@ def display_arrivals(arrivals):
             # Format direction
             direction_text = f" (Direction {direction_id})" if direction_id != '' else ""
 
-            # Choose appropriate emoji based on route type
-            emoji = "🚌" if route_type == "Bus" else "🚈" if route_type in ["Light Rail",
-                                                                          "Heavy Rail"] else "🚃" if route_type == "Commuter Rail" else "🚃" if route_type == "Ferry" else "⛴️"
-
-            print(f"{emoji} Route {route_name} : {formatted_time} ({time_display})")
+            
+            print(f"{route_type} Route {route_name} : {formatted_time} ({time_display})")
             print(f"")
     else:
-        print(f"ðŸ“­ No arrival information available")
-        print(f"ðŸ“… Last Updated: {current_time}")
+        print(f“­⛔ No arrival information available")
+        print(f"Last Updated: {current_time}")
         print()
 
 
@@ -268,7 +265,7 @@ def main():
         run_monitoring()
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
-        print("âŒ An error occurred while running the monitoring system")
+        print("⛔ An error occurred while running the monitoring system")
 
 
 if __name__ == "__main__":
