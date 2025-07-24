@@ -5,7 +5,7 @@
     "endpoints": {
       "arrivals": "/predictions?filter[stop]={stop_id}&sort=arrival_time"
     },
-    "api_key": "YOURS",
+    "api_key": "b4636f5086c74fd2b16bfb07fc17bf94",
     "headers": {
       "Content-Type": "application/json",
       "Accept": "application/vnd.api+json"
