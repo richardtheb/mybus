@@ -102,11 +102,11 @@ class BusArrivalDisplay:
 
             # Route information
             route_text = route_font.render(f"{route_name}", True, TEXT_COLOR)
-            self.screen.blit(route_text, (SCREEN_WIDTH ** 0.2, y_pos))
+            self.screen.blit(route_text, (100, y_pos))
 
             # Arrival time
             time_text = time_font.render(formatted_time, True, TEXT_COLOR)
-            self.screen.blit(time_text, (SCREEN_WIDTH ** 0.5, y_pos))
+            self.screen.blit(time_text, (300, y_pos))
 
             # Countdown with appropriate color
             if minutes_to_arrival is not None:
@@ -127,7 +127,7 @@ class BusArrivalDisplay:
                 color = TEXT_COLOR
 
             countdown_surface = time_font.render(countdown_text, True, color)
-            self.screen.blit(countdown_surface, (SCREEN_WIDTH ** 0.6, y_pos))
+            self.screen.blit(countdown_surface, (500, y_pos))
 
             # Draw separator line between routes
             if i < len(visible_arrivals) - 1:
