@@ -72,13 +72,13 @@ class BusArrivalDisplay:
         y_pos = 125
 
         route_header = route_font.render("Route", True, HEADER_COLOR)
-        self.screen.blit(route_header, (SCREEN_WIDTH ** 0.3, y_pos))
+        self.screen.blit(route_header, (100, y_pos))
 
         time_header = route_font.render("Arrival", True, HEADER_COLOR)
-        self.screen.blit(time_header, (SCREEN_WIDTH ** 0.6, y_pos))
+        self.screen.blit(time_header, (300, y_pos))
 
         countdown_header = route_font.render("Countdown", True, HEADER_COLOR)
-        self.screen.blit(countdown_header, (SCREEN_WIDTH ** 0.8, y_pos))
+        self.screen.blit(countdown_header, (500, y_pos))
 
         # Separator line
         pygame.draw.line(self.screen, TEXT_COLOR, (50, y_pos + 25), (SCREEN_WIDTH - 50, y_pos + 25), 1)
