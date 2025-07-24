@@ -11,8 +11,8 @@ import time
 pygame.init()
 
 # Constants for display
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 400
+SCREEN_WIDTH = 720
+SCREEN_HEIGHT = 720
 BACKGROUND_COLOR = (0, 0, 0)  # Black
 TEXT_COLOR = (255, 255, 0)  # Yellow
 HEADER_COLOR = (255, 255, 255)  # White
@@ -21,10 +21,10 @@ WARNING_COLOR = (255, 165, 0)  # Orange
 URGENT_COLOR = (255, 0, 0)  # Red
 
 # Fonts
-header_font = pygame.font.Font(None, 36)
-route_font = pygame.font.Font(None, 28)
-time_font = pygame.font.Font(None, 22)
-small_font = pygame.font.Font(None, 18)
+header_font = pygame.font.Font(None, 46)
+route_font = pygame.font.Font(None, 38)
+time_font = pygame.font.Font(None, 32)
+small_font = pygame.font.Font(None, 28)
 
 
 class BusArrivalDisplay:
@@ -72,13 +72,13 @@ class BusArrivalDisplay:
         y_pos = 125
 
         route_header = route_font.render("Route", True, HEADER_COLOR)
-        self.screen.blit(route_header, (50, y_pos))
+        self.screen.blit(route_header, (SCREEN_WIDTH ** 0.3, y_pos))
 
         time_header = route_font.render("Arrival", True, HEADER_COLOR)
-        self.screen.blit(time_header, (150, y_pos))
+        self.screen.blit(time_header, (SCREEN_WIDTH ** 0.6, y_pos))
 
         countdown_header = route_font.render("Countdown", True, HEADER_COLOR)
-        self.screen.blit(countdown_header, (250, y_pos))
+        self.screen.blit(countdown_header, (SCREEN_WIDTH ** 0.8, y_pos))
 
         # Separator line
         pygame.draw.line(self.screen, TEXT_COLOR, (50, y_pos + 25), (SCREEN_WIDTH - 50, y_pos + 25), 1)
