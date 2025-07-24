@@ -24,13 +24,14 @@ A simple Python application for the Raspberry Pi that provides real-time transit
 ### 1. Clone this Git
 
 ```
-Git pull https://github.com/richardtheb/mybus
+git pull https://github.com/richardtheb/mybus
 cd mybus
 ```
 
 ### 2. Create and Activate The Virtual Environment
 ```
-python3 -m venv mybus source mybus-env/bin/activate
+python3 -m venv myvenv
+source myvenv-env/bin/activate
 ```
 ### 3. Install Dependencies
 ```
